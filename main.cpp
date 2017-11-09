@@ -7,7 +7,7 @@ using namespace std;
 //Prototypes
 vector <string> fileName(); //Asks for users input
 
-bool validBMP(vector<vector<Pixel> >);//Checks to see if file is valid bitmap
+bool validBMP(string);//Checks to see if file is valid bitmap
 
 void rgbValues();//Gets RGB values for each pixel
 
@@ -25,44 +25,49 @@ Pixel rgb;
 int main()
 {
 fileName();
-
-/*for(int i=0; i<MAX_FILES;i++)
-    {   
-    input.push_back( fileName() );
-    }
-  */  
-return 0;
-
 }
+
 
 //Asks user for file names until they enter 10 names or type "Done"
 vector <string> fileName()
 {
-vector<string> files;
+vector<string> fileList;
 cout<<"Please enter filename(s) or type 'Done' when finished."<<endl;
-cin>>files;
-validBMP(files);
-while(validBMP = false;)
+string files;
+while(cin >> files)
     {
-        cout<<"Please make sure the images are all the same size and valid Bitmap files."
-        cin>>files;
-        validBMP(files);
-    }
-return fileName;
-}
+        if( files == "Done")
+            break;
+        else if(validBMP(files) == true) 
+            {
+            fileList.push_back(files);
+            }
+        else if(fileList.size() == MAX_FILES)
+        break;
+        else
+            {
+            cout<<"Please make sure the images are all the same size and valid Bitmap files."<<endl;
+            }                       
+     }
 
-bool validBMP(vector <string> images)
-{
-    for(int i=0;i<images.size;i++)
-    {
-        if(images[i] == images[i].IsImage)
-        {
-    return true;
-        }
-else
-return false;
-    }
+
+return fileList;
 }
+//Opens file and checks to see if it a valid Bitmap file
+bool validBMP(string file)
+{
+Bitmap image;
+image.open(file);
+        if(image.isImage())
+            {
+            return true;
+            }
+        else
+            {   
+            return false;
+            }   
+}   
+
 //Repeatedly ask user for their filename until they enter "Done" or entered 10 file names
 
 //print an error for any filename with a problem
